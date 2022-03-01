@@ -31,13 +31,13 @@ const con = mysql.createConnection({
 
 function submitMessage(messageText){
    
-        
-        const sql = `INSERT INTO messages (message) VALUES('${messageText}');`;
+        const processedMessage = messageText.replace(/[']/g,"''");
+        const sql = `INSERT INTO messages (message) VALUES('${processedMessage}');`;
         con.query(sql, function(error, result){
             if (error){
                 throw error;
             }
-            console.log(`Inserted ${messageText} into the table`);
+            console.log(`Inserted ${processedMessage} into the table`);
         })
 
     
