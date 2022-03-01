@@ -13,6 +13,12 @@ const io = new Server(server);
 
 const PORT = 5000;
 const path = __dirname;
+//this is to help us with our edge cases hehehe
+const ranges = [
+    '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+    '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+    '\ud83d[\ude80-\udeff]' // U+1F680 to U+1F6FF
+  ];
 //const db = new sqlite3.Database('./database.sqlite');
 //use our middleware
 app.use(morgan('dev'));
@@ -29,9 +35,14 @@ const con = mysql.createConnection({
     database: 'msgdatabase'
   });
 
+  function removeInvalidChars(str) {
+    str = str.replace(new RegExp(ranges.join('|'), 'g'), '');
+    return str;
+  }
+
 function submitMessage(messageText){
    
-        const processedMessage = messageText.replace(/[']/g,"''");
+        const processedMessage = removeInvalidChars(messageText).replace(/[']/g,"''");
         const sql = `INSERT INTO messages (message) VALUES('${processedMessage}');`;
         con.query(sql, function(error, result){
             if (error){
