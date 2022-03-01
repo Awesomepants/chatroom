@@ -1,0 +1,22 @@
+{
+  "name": "freestylin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.3",
+    "http": "^0.0.1-security",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "socket.io": "^4.4.1"
+  }
+}

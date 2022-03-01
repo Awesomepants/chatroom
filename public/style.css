@@ -1,0 +1,10 @@
+#messages{
+    width: 100%;
+    min-height: 500px;
+    max-height: 600px;
+    overflow: auto;
+    outline: 3px dotted gray;
+}
+#msg{
+    width: 100%;
+}
