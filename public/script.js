@@ -9,7 +9,7 @@ function writeMessagestoPage(messages){
     messageReversed = messages.reverse();
     messageReversed.forEach((message) => {
         const messageContent = message.message;
-        $('#messages').append(`<p>${messageContent}</p>`);
+        $('#messages').append(`<div class="messageBox">${messageContent}</div>`);
     })
 }
 function scrollToBottom(){

@@ -33,7 +33,8 @@ app.use(errorHandler());
 
 //initialize our database api
 
-const con = mysql.createConnection({
+const con = mysql.createPool({
+    connectionLimit: 100,
     host: "localhost",
     user: "chatroom",
     password: "chetroomchetpassword6",
@@ -47,14 +48,12 @@ const con = mysql.createConnection({
 
 function getOrGenerateUsername(ip){
     ipAddress = JSON.stringify(ip);
-    console.log('the function was called getorGenerateusername');
     let userObject = {};
     let userExists = false;
     const user = users.find((user)=>{
         return user.ip === ipAddress;
     })
     if(!user){
-        console.log('userExists evaluated to falsy');
         const username = generateRandomUsername();
         userObject = {
             ip: ipAddress,
@@ -105,9 +104,9 @@ function emitInfo(){
     })
     app.post('/',(req, res, next) => {
         const ip = getRequestIpAddress(req);
-        console.log(ip);
+        
         const username = getOrGenerateUsername(ip);
-        //console.log(req.body);
+        
         console.log(req.body.msg);
         if(req.body.msg){
             submitMessage(req.body.msg,username);
@@ -125,21 +124,13 @@ function emitInfo(){
     //})
    
 //ready to go!
-con.connect(function(error){
+/*con.connect(function(error){
     if(error){
         throw error;
-    } else {
+    } else {*/
         server.listen(PORT, () => {
     console.log(`listening on PORT ${PORT}`)
 })
-    }
-})
+   /* }
+}) */
 
-
-/*app.listen(PORT, (err) => {
-    if(err){
-        console.log(err);
-    } else {
-        console.log(`App is listening on PORT ${PORT}`);
-    }
-});*/

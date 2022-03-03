@@ -1,3 +1,6 @@
+body{
+    background-color: rgb(65, 63, 63);
+}
 #messages{
     width: 100%;
     min-height: 500px;
@@ -7,4 +10,16 @@
 }
 #msg{
     width: 100%;
+}
+.messageBody{
+    color:rgb(221, 220, 230);
+}
+.messageHeader{
+    background-color: rgb(42, 58, 88);
+    color: whitesmoke;
+    outline: 1px blueviolet;
+}
+.messageBox{
+    background-color: rgb(49, 48, 48);
+    outline: 2px solid #00eeff;
 }
