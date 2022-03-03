@@ -22,19 +22,27 @@ const IP_HEADERS = [
 
     // you can add more matching headers here ...
 ];
-
+//adding this here because double question mark syntax didn't work on the hardware
+function doubleQuestionMarkStandIn(value1, value2){
+    if(value1 === null || value1 === undefined){
+        return value2;
+    } else {
+        return value1;
+    }
+}
 const getRequestIpAddress = request => {
     const headers = request.headers;
     for (const header of IP_HEADERS) {
         const value = headers[header];
         if (value) {
             const parts = value.split(/\s*,\s*/g);
-            return parts[0] ?? null;
+            
+            return doubleQuestionMarkStandIn(parts[0],null);
         }
     }
-    const client = request.connection ?? request.socket ?? request.info;
+    const client = doubleQuestionMarkStandIn(doubleQuestionMarkStandIn(request.connection,request.socket),request.info);
     if (client) {
-        return client.remoteAddress ?? null;
+        return doubleQuestionMarkStandIn(client.remoteAddress,null);
     }
     return null;
 };
